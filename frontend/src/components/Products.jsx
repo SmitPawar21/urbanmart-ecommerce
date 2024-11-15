@@ -6,22 +6,42 @@ export const Products = () => {
     const[products, setProducts] = useState([
         {
             name: 'Nike',
-            desc: 'ftyuh ytuyibjk nyvh mnfyguivh nmugkbjvh mn',
+            desc: 'Kids',
             price: 789
         },
         {
             name: 'Nike',
-            desc: 'ftyuh ytuyibjk nyvh mnfyguivh nmugkbjvh mn',
+            desc: 'Men',
             price: 789
         },
         {
             name: 'Adidas',
-            desc: 'ftyuh ytuyibjk nyvh mnfyguivh nmugkbjvh mn',
+            desc: 'Men',
             price: 670
         },
         {
             name: 'Puma',
-            desc: 'ftyuh ytuyibjk nyvh mnfyguivh nmugkbjvh mn',
+            desc: 'Men',
+            price: 200
+        },
+        {
+            name: 'Puma',
+            desc: 'Men',
+            price: 200
+        },
+        {
+            name: 'Puma',
+            desc: 'Men',
+            price: 200
+        },
+        {
+            name: 'Puma',
+            desc: 'Women',
+            price: 200
+        },
+        {
+            name: 'Puma',
+            desc: 'Kids',
             price: 200
         },
 

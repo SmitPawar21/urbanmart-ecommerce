@@ -1,4 +1,7 @@
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 export const ProductCard = (props) => {
+
     return (
         <div class="product-card">
             <div class="product-card__image">
@@ -6,10 +9,22 @@ export const ProductCard = (props) => {
             </div>
             <div class="product-card__info">
                 <h2 class="product-card__title"> {props.name} </h2>
-                <p class="product-card__description"> {props.desc} </p>
-                <div class="product-card__price-row">
+
+                <div style={{display:'flex', justifyContent:'space-between', marginBottom:'1vw'}}>
+                    <p class="product-card__description"> {props.desc} </p>
                     <span class="product-card__price">$ {props.price}</span>
-                    <button class="product-card__btn">Add to Cart</button>
+                </div>
+
+
+                <div class="product-card__price-row">
+                    <button style={{backgroundColor:'#a0896f', color:'white', padding:'2vh 2vh', border:'none', outline:'none', borderRadius:'5px', cursor:'pointer'}}>
+                        Details
+                    </button>
+
+                    <button class="product-card__btn">
+                        <AddShoppingCartIcon/>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
         </div>

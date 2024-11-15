@@ -1,5 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { useState } from "react";
+import Divider from '@mui/material/Divider';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export const CartPage = () => {
 
@@ -15,12 +17,15 @@ export const CartPage = () => {
 
                 <div style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
                     <div>
-                        <h1 style={{ color: 'white' }}> Shopping Bag </h1>
-                        <h4 style={{ marginTop: '2vh', color: 'white' }}> {list.length} items in Your Bag </h4>
+                        <h1 style={{ color: 'white' }}>
+                            <ShoppingCartIcon sx={{mr:2}} />
+                             Shopping Cart
+                        </h1>
+                        <h4 style={{ marginTop: '2vh', color: 'white' }}> {list.length} items in Your Cart </h4>
                     </div>
 
                     <div>
-                        <button style={{ width: '30vw', height: '10vh' }}> CONTINUE SHOPPING </button>
+                        <button className="cart-page-button" style={{ width: '30vw', height: '10vh' }}> CONTINUE SHOPPING </button>
                     </div>
                 </div>
 
@@ -55,6 +60,7 @@ export const CartPage = () => {
                             Shipping Fee
                             <p> Rs. 50.00 </p>
                         </span>
+                        <Divider sx={{ my: 2, backgroundColor:'white' }} />
                         <span style={{ marginTop: '2vh', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                             Grand Total
                             <p> Rs. 14,550.00 </p>
@@ -62,7 +68,7 @@ export const CartPage = () => {
                     </div>
 
                     <div style={{ width: '45%', padding: '2vh 3vw', marginTop: '5vh', boxSizing: 'border-box', borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <button style={{ width: '70%', height: '40%' }}> PROCEED TO BUY </button>
+                        <button className="cart-page-button" style={{ width: '70%', height: '40%' }}> PROCEED TO BUY </button>
                     </div>
                 </div>
 

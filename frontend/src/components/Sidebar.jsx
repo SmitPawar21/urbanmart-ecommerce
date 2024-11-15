@@ -7,6 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const drawerWidth = '27vw';
 
@@ -62,7 +63,10 @@ export const Sidebar = () => {
               margin="normal"
             />
 
-            <h2> Filters </h2>
+            <h2 style={{display:'flex', alignItems:'center'}}>
+              <FilterAltIcon sx={{mr:1}}/>
+               Filters 
+            </h2>
 
             <Divider sx={{ my: 2 }} />
 
@@ -103,17 +107,6 @@ export const Sidebar = () => {
         </Drawer>
       </Box>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Box>
     </Box>
   );
 };

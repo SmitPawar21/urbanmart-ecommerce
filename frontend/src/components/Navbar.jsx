@@ -12,8 +12,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import CallIcon from '@mui/icons-material/Call';
 
-const pages = ['Home', 'About Us', 'Shopping', 'Cart'];
+const pages = ['Home', 'About Us', 'Shopping', 'Watchlist', 'Cart', 'Subscription'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Navbar = () => {
@@ -37,16 +38,16 @@ export const Navbar = () => {
 
   return (
     <AppBar position="fixed" style={{backgroundColor:'#393e46', height:'12vh'}}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* Logo for desktop */}
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
+              mr: 10,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -58,6 +59,7 @@ export const Navbar = () => {
             Urban Mart
           </Typography>
 
+          {/* Mobile menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -90,8 +92,13 @@ export const Navbar = () => {
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography sx={{ textAlign: 'center' }}>Contact</Typography>
+              </MenuItem>
             </Menu>
           </Box>
+
+          {/* Logo for mobile */}
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -112,7 +119,8 @@ export const Navbar = () => {
             Urban Mart
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft:'5vw' }}>
+          {/* Desktop menu items */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -123,6 +131,24 @@ export const Navbar = () => {
               </Button>
             ))}
           </Box>
+
+          {/* Contact button - always on the right */}
+          <Button
+            variant="outlined"
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              gap:'1vw',
+              color: 'white',
+              borderColor: 'white',
+              '&:hover': {
+                borderColor: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              },
+              ml: 2
+            }}
+          >
+            Register
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>
