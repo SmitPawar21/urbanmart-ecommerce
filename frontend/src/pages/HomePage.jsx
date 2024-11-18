@@ -1,6 +1,6 @@
 import {Navbar} from "../components/Navbar";
 import { Banner } from "../components/Banner";
-import { Products } from "../components/Products";
+import { LatestProds } from "../components/LatestProds";
 import { Feature } from "../components/Feature";
 import { ScrollingText } from "../components/ScrollingText";
 import { Footer } from "../components/Footer";
@@ -21,7 +21,7 @@ export const HomePage = ()=>{
                 <AutoAwesomeIcon sx={{ml:2}} />
             </h2>
 
-            <Products />
+            <LatestProds />
             {/* <h2 style={{marginTop:'5vh', textAlign:'center'}}>Features</h2> */}
             <Feature/>
 

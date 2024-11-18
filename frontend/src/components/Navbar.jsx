@@ -13,11 +13,26 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CallIcon from '@mui/icons-material/Call';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Home', 'About Us', 'Shopping', 'Watchlist', 'Cart', 'Subscription'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'about', 'collection', 'watchlist', 'cart', 'subscription'];
 
 export const Navbar = () => {
+
+  const navigate = useNavigate();
+
+    const handleRegister = ()=>{
+        navigate('/register');
+    }
+
+    const handleNavigation = (page) => {
+      if(page === "Home") {
+        return navigate('/');
+      }
+      navigate(`/${page}`);
+    }
+
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -124,7 +139,7 @@ export const Navbar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleNavigation(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -132,7 +147,6 @@ export const Navbar = () => {
             ))}
           </Box>
 
-          {/* Contact button - always on the right */}
           <Button
             variant="outlined"
             sx={{
@@ -146,6 +160,7 @@ export const Navbar = () => {
               },
               ml: 2
             }}
+            onClick={handleRegister}
           >
             Register
           </Button>

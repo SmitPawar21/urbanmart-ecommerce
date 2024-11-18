@@ -39,8 +39,6 @@ export const ProductPage = ()=>{
                         <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw'}}>Save to Watchlist</button>
 
                         <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw'}}>Back To Shop</button>
-
-
                     </div>
 
                 </div>
