@@ -1,12 +1,17 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthProvider';
 
 export const ProductCard = (props) => {
 
     const navigate = useNavigate();
 
+    const {newProdId} = useAuth();
+
     const handleDetails = (id)=>{
+        console.log(id);
+        newProdId(id);
         navigate('/product');
     }
 
@@ -16,7 +21,6 @@ export const ProductCard = (props) => {
                 <img src={props.img_url} alt="Red Nike Shoes" />
             </div>
             <div class="product-card__info">
-                <p>{props.id}</p>
                 <h2 class="product-card__title"> {props.name} </h2>
 
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:'1vw'}}>
@@ -24,7 +28,7 @@ export const ProductCard = (props) => {
                 </div>
 
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:'1vw'}}>
-                    <span class="product-card__price">$ {props.price}</span>
+                    <span class="product-card__price">₹ {props.price}</span>
                     <span class="product-card__price" style={{display:'flex', alignItems:'center'}}>{props.star} <StarIcon sx={{color:'orange'}} /> </span>
 
                 </div>

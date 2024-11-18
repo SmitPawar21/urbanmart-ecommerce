@@ -64,7 +64,7 @@ export const Sidebar = () => {
             />
 
             <h2 style={{display:'flex', alignItems:'center'}}>
-              <FilterAltIcon sx={{mr:1}}/>
+              <FilterAltIcon sx={{mr:1, my:1}}/>
                Filters 
             </h2>
 

@@ -25,7 +25,7 @@ export const Products = () => {
             <div className="card-area">
                 {
                     products.map(product =>{
-                        return <ProductCard name={product.title} desc={product.description} price = {product.price} star={product.star} img_url={product.image_url}/>
+                        return <ProductCard id={product.prod_id} name={product.title} desc={product.description} price = {product.price} star={product.star} img_url={product.image_url}/>
                     })
                 }
             </div>

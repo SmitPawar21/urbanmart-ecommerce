@@ -7,21 +7,24 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrdersPage } from './pages/OrdersPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { AuthProvider } from './components/AuthProvider';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/product' element={<ProductPage />} />
-          <Route path='/collection' element={<CollectionPage />} />
-          <Route path='/cart' element={<CartPage />} />
-          <Route path='/checkout' element={<CheckoutPage />} />
-          <Route path='/orders' element={<OrdersPage />} />
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/product' element={<ProductPage />} />
+            <Route path='/collection' element={<CollectionPage />} />
+            <Route path='/cart' element={<CartPage />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
+            <Route path='/orders' element={<OrdersPage />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }

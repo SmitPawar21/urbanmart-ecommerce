@@ -57,4 +57,24 @@ router.get('/products', async (req, res) => {
     }
 });
 
+// One Selected Product
+router.post('/oneproduct', async(req, res)=>{
+    const {p_id} = req.body;
+    console.log(p_id);
+
+    try{
+        const query = `
+            SELECT * FROM products
+            WHERE prod_id = $1
+        `;
+
+        const value = [p_id];
+        const result = await pool.query(query, value);
+
+        res.status(201).json({item: result.rows[0]});
+    } catch(err) {
+        res.status(403).json({error: err});
+    }
+})
+
 module.exports = router;
