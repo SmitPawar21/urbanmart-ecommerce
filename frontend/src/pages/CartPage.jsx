@@ -38,6 +38,9 @@ export const CartPage = () => {
     const handleCheckout = () => {
         navigate('/checkout');
     }
+    const handleShop = () => {
+        navigate('/collection');
+    }
 
     const [subTotal, setSubTotal] = useState(0);
 
@@ -63,7 +66,7 @@ export const CartPage = () => {
                     </div>
 
                     <div>
-                        <button className="cart-page-button" style={{ width: '30vw', height: '10vh' }}> CONTINUE SHOPPING </button>
+                        <button className="cart-page-button" style={{ width: '30vw', height: '10vh' }} onClick={handleShop}> CONTINUE SHOPPING </button>
                     </div>
                 </div>
 

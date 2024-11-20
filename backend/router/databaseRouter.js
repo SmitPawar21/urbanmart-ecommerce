@@ -57,6 +57,19 @@ router.get('/products', async (req, res) => {
     }
 });
 
+// only latest products
+router.get('/latestproducts', async (req, res) => {
+    try{
+        const query = 'SELECT * FROM products ORDER BY release_date DESC LIMIT 4';
+        const result = await pool.query(query);
+
+        res.status(201).json(result.rows);
+    } catch (err){
+        console.error('Error fetching products:', error);
+        res.status(500).json({message:'Internal server error'});
+    }
+});
+
 // One Selected Product
 router.post('/oneproduct', async(req, res)=>{
     const {p_id} = req.body;

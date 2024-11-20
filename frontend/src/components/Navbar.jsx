@@ -7,38 +7,36 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import CallIcon from '@mui/icons-material/Call';
 import { useNavigate } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Cookies from "js-cookie";
 
 const pages = ['Home', 'about', 'collection', 'watchlist', 'cart', 'subscription'];
 
 export const Navbar = () => {
-
   const navigate = useNavigate();
-
-    const handleRegister = ()=>{
-        navigate('/register');
-    }
-
-    const handleNavigation = (page) => {
-      if(page === "Home") {
-        return navigate('/');
-      }
-      navigate(`/${page}`);
-    }
-
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const userId = Cookies.get('user_id');
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
+  const handleNavigation = (page) => {
+    if (page === "Home") {
+      return navigate('/');
+    }
+    navigate(`/${page}`);
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -51,9 +49,21 @@ export const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  // User menu options
+  const handleProfile = () => {
+    navigate('/profile');
+    handleCloseUserMenu();
+  };
+
+  const handleLogout = () => {
+    Cookies.remove('user_id');
+    navigate('/');
+    handleCloseUserMenu();
+  };
+
   return (
-    <AppBar position="fixed" style={{backgroundColor:'#393e46', height:'12vh'}}>
-      <Container maxWidth="xl" >
+    <AppBar position="fixed" style={{ backgroundColor: '#393e46', height: '12vh' }}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo for desktop */}
           <Typography
@@ -103,13 +113,13 @@ export const Navbar = () => {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => {
+                  handleNavigation(page);
+                  handleCloseNavMenu();
+                }}>
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography sx={{ textAlign: 'center' }}>Contact</Typography>
-              </MenuItem>
             </Menu>
           </Box>
 
@@ -147,23 +157,57 @@ export const Navbar = () => {
             ))}
           </Box>
 
-          <Button
-            variant="outlined"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              gap:'1vw',
-              color: 'white',
-              borderColor: 'white',
-              '&:hover': {
-                borderColor: 'white',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              },
-              ml: 2
-            }}
-            onClick={handleRegister}
-          >
-            Register
-          </Button>
+          {/* User authentication section */}
+          <Box sx={{ flexGrow: 0 }}>
+            {!userId ? (
+              <Button
+                variant="outlined"
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  gap: '1vw',
+                  color: 'white',
+                  borderColor: 'white',
+                  '&:hover': {
+                    borderColor: 'white',
+                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  },
+                  ml: 2
+                }}
+                onClick={handleRegister}
+              >
+                Register
+              </Button>
+            ) : (
+              <>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <AccountCircleIcon sx={{ color: 'white', fontSize: '2rem' }} />
+                </IconButton>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleProfile}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </>
+            )}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
