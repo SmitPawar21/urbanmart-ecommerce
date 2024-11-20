@@ -2,7 +2,6 @@ import { Navbar } from "../components/Navbar";
 import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAuth } from "../components/AuthProvider";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -78,7 +77,7 @@ export const CartPage = () => {
                             list.map((item, index) => { 
 
                                 return (
-                                    <li key={index} style={{ width: '100%', height: '15vh', padding: '', boxSizing: 'border-box', backgroundColor: '#c7b198', display: 'flex', alignItems: 'center', marginBottom: '3vh', padding: '0vh 2vw' }}>
+                                    <li key={index} style={{ width: '100%', height: '15vh', padding: '', boxSizing: 'border-box', backgroundColor: '#dfd3c3', display: 'flex', alignItems: 'center', marginBottom: '3vh', padding: '0vh 2vw' }}>
                                         <img style={{ width: '10%', height: '90%', marginRight: '4vw' }} src={item.image_url} />
 
                                         <h3 style={{ width: '50%', marginRight: '4vw' }}> {item.title} </h3>
