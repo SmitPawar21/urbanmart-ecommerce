@@ -295,20 +295,26 @@
 
 /* CHECKOUT PAGE */
 .checkout-page {
-  height: 60vh;
+  height: 90vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 25vh 3vw;
+  padding: 5vh 3vw;
   font-family: Arial, sans-serif;
   background-color: #dfd3c3;
+  box-sizing:border-box;
 }
 
-.order-summary {
+/* .order-summary {
   width: 60%;
+  height: 90%;
+  border: 1px solid red;
   border-right: 2px solid #ccc;
-  padding: 20px;
   background-color: #f0ece2;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
 }
 
 h2 {
@@ -318,10 +324,11 @@ h2 {
 
 .order-list {
   list-style-type: none;
-  padding: 0;
+  width: 100%;
 }
 
 .order-item {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
@@ -489,4 +496,22 @@ h2 {
 }
 .flip{
   transform: rotateY(180deg);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #4444442f;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f4b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

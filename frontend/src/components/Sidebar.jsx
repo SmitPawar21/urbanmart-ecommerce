@@ -8,6 +8,7 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { useAuth } from './AuthProvider';
 
 const drawerWidth = '27vw';
 
@@ -15,6 +16,12 @@ export const Sidebar = () => {
   const [category, setCategory] = useState([]);
   const [priceRange, setPriceRange] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const {setSearchTerm} = useAuth();
+
+  const handleSearch = (e)=>{
+    setSearchTerm(e.target.value);
+  }
 
   const handleCategoryChange = (event) => {
     const { value, checked } = event.target;
@@ -61,6 +68,7 @@ export const Sidebar = () => {
               variant="outlined"
               fullWidth
               margin="normal"
+              onChange={handleSearch}
             />
 
             <h2 style={{display:'flex', alignItems:'center'}}>

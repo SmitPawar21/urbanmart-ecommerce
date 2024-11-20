@@ -2,9 +2,11 @@ import { Navbar } from "../components/Navbar";
 import { useState } from "react";
 import signup_img from "../images/signup_img.avif";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthProvider";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const [isFlip, setIsFlip] = useState(false);
 
@@ -88,6 +90,7 @@ export const RegisterPage = () => {
       const performLogin = async ()=>{
         await fetch('http://localhost:5000/login',{
             method: 'POST',
+            credentials: 'include',
             headers:{
                 'content-type': 'application/json'
             },
@@ -100,6 +103,8 @@ export const RegisterPage = () => {
         .then((data) =>{
             console.log(data);
             if(data.message === "User Logged in successfully"){
+                console.log(data.user_id);
+                login();
                 return navigate('/');
             }
             else{

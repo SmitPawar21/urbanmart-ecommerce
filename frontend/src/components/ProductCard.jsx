@@ -2,6 +2,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
+import Cookies from "js-cookie"
 
 export const ProductCard = (props) => {
 
@@ -15,10 +16,41 @@ export const ProductCard = (props) => {
         navigate('/product');
     }
 
+    const handleCart = async (prod_id, qty) =>{
+        if(!(Cookies.get('user_id'))){
+            alert('You have to Register First');
+            return;
+        }
+
+        await fetch('http://localhost:5000/addtocart',{
+            method:'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: Cookies.get('user_id'), 
+                prod_id: prod_id,
+                quantity: qty 
+            })
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            if(data.message === "Added to Cart"){
+                alert('Item Added to Cart successfully');
+                return;
+            }
+            else if(data.message === "Already there in cart"){
+                alert('Item Already there in cart');
+                return;
+            }
+            alert('Item not added. Something went wrong.')
+        })
+    }
+
     return (
         <div class="product-card">
             <div class="product-card__image">
-                <img src={props.img_url} alt="Red Nike Shoes" />
+                <img src={props.img_url} alt="" />
             </div>
             <div class="product-card__info">
                 <h2 class="product-card__title"> {props.name} </h2>
@@ -41,7 +73,7 @@ export const ProductCard = (props) => {
                         Details
                     </button>
 
-                    <button class="product-card__btn">
+                    <button class="product-card__btn" onClick={() => handleCart(props.id, 1)}>
                         <AddShoppingCartIcon/>
                         Add to Cart
                     </button>

@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export const CheckoutPage = () => {
-    // Sample order data
-    const orders = [
-        { id: 1, name: 'Product 1', price: 29.99, quantity: 2 },
-        { id: 2, name: 'Product 2', price: 49.99, quantity: 1 },
-        { id: 3, name: 'Product 3', price: 19.99, quantity: 3 },
-    ];
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        const cookie_se_aya_hua_userId = Cookies.get('user_id');
+        console.log("cookie_se_aya_hua_userId: ",cookie_se_aya_hua_userId);
+        
+        const fetchCart = async()=>{
+            await fetch('http://localhost:5000/allcartitems',{
+                method:'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({user_id: cookie_se_aya_hua_userId})
+            })
+            .then((res)=>res.json())
+            .then((data) => {
+                console.log(data);
+                setList(data.items);
+            })
+        };
+
+        fetchCart();
+
+    }, [])
 
     const [paymentMethod, setPaymentMethod] = useState('Credit Card');
     const [totalAmount, setTotalAmount] = useState(0);
@@ -16,7 +36,7 @@ export const CheckoutPage = () => {
     // Calculate the total amount
     const calculateTotalAmount = () => {
         let total = 0;
-        orders.forEach(order => {
+        list.forEach(order => {
             total += order.price * order.quantity;
         });
         setTotalAmount(total);
@@ -35,25 +55,26 @@ export const CheckoutPage = () => {
     // Recalculate total when component mounts or orders change
     React.useEffect(() => {
         calculateTotalAmount();
-    }, [orders]);
+    }, [list]);
 
     return (
-        <div style={{backgroundColor:'#dfd3c3'}}>
+        <div style={{backgroundColor:'#dfd3c3', boxSizing:'border-box'}}>
 
-            <div className="checkout-page">
-                <Navbar />
+            <Navbar />
+            <div className="checkout-page" style={{position:'absolute', top:'12vh', left:'0vw', boxSizing:'border-box', overflowY:'hidden', height:'88vh', display:'flex', alignItems:'center'}}>
 
-                <div className="order-summary">
-                    <h2>Order Summary</h2>
-                    <ul className="order-list">
-                        {orders.map(order => (
-                            <li key={order.id} className="order-item">
-                                <span className="order-name">{order.name}</span>
-                                <span className="order-quantity">x{order.quantity}</span>
-                                <span className="order-price">${order.price.toFixed(2)}</span>
+                <div className="order-summary" style={{boxSizing:'border-box', padding:'2vh 2vw', maxHeight:'70vh', overflowY:'scroll', backgroundColor:'#c7b198'}}>
+                    <h2 style={{marginBottom:'1vh'}}>Order Summary</h2>
+                    <ul className="order-list" style={{padding:'3vh 2vw', marginBottom:'3vh'}}>
+                        {list.map(item => (
+                            <li key={item.id} className="order-item">
+                                <span className="order-name" style={{width:'50%'}}>{item.title}</span>
+                                <span className="order-quantity">x{item.quantity}</span>
+                                <span className="order-price">${item.price * item.quantity}</span>
                             </li>
                         ))}
                     </ul>
+
                     <div className="total-summary">
                         <h3>Total: ${totalAmount.toFixed(2)}</h3>
                     </div>
@@ -63,9 +84,10 @@ export const CheckoutPage = () => {
                     </div>
                 </div>
 
-                <div className="payment-section">
-                    <h2>Payment</h2>
-                    <div className="payment-method">
+                <div className="payment-section" style={{width:'35%', boxSizing:'border-box', padding:'2vh 1vw', maxHeight:'55vh', backgroundColor:'#596e79', color: 'white'}}>
+                    <h2 style={{textAlign:'center'}}>Payment</h2>
+                    <div className="payment-method" style={{display:'flex', flexDirection:'column', gap:'2vh', marginTop:'5vh', marginBottom:'3vh'}}>
+                        <h4>Select Payment</h4>
                         <label>
                             <input
                                 type="radio"
@@ -73,6 +95,7 @@ export const CheckoutPage = () => {
                                 value="Credit Card"
                                 checked={paymentMethod === 'Credit Card'}
                                 onChange={handlePaymentMethodChange}
+                                style={{marginRight:'1vw'}}
                             />
                             Credit Card
                         </label>
@@ -83,6 +106,7 @@ export const CheckoutPage = () => {
                                 value="PayPal"
                                 checked={paymentMethod === 'PayPal'}
                                 onChange={handlePaymentMethodChange}
+                                style={{marginRight:'1vw'}}
                             />
                             PayPal
                         </label>
@@ -93,20 +117,21 @@ export const CheckoutPage = () => {
                                 value="Cash on Delivery"
                                 checked={paymentMethod === 'Cash on Delivery'}
                                 onChange={handlePaymentMethodChange}
+                                style={{marginRight:'1vw'}}
                             />
                             Cash on Delivery
                         </label>
                     </div>
 
-                    <button className="place-order-btn" onClick={handlePlaceOrder}>
+                    <button className="place-order-btn" style={{width:'100%', padding:'2vh 1vw', marginBottom:'2vh', backgroundColor:'#42b883', border:'none', outline:'none', color:'white', cursor:'pointer', fontSize:'1.3vw'}} onClick={handlePlaceOrder}>
                         Place Order
                     </button>
-                    <button style={{backgroundColor:'red'}} className="place-order-btn">
+                    <button style={{width:'100%', padding:'2vh 1vw', backgroundColor:'#ef5a5a', border:'none', outline:'none', color:'white', cursor:'pointer', fontSize:'1.3vw'}} className="place-order-btn">
                          Go Back to Cart
                     </button>
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };

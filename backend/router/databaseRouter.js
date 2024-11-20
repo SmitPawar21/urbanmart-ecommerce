@@ -77,4 +77,53 @@ router.post('/oneproduct', async(req, res)=>{
     }
 })
 
+// Add To Cart
+router.post('/addtocart', async (req, res) => {
+    const { user_id, prod_id, quantity } = req.body;
+
+    try {
+        const checkQuery = `
+            SELECT COUNT(*) AS count
+            FROM cart
+            WHERE user_id = $1 AND prod_id = $2
+        `;
+        const checkResult = await pool.query(checkQuery, [user_id, prod_id]);
+
+        if (parseInt(checkResult.rows[0].count) > 0) {
+            return res.status(201).json({ message: 'Already there in cart' });
+        }
+
+        const insertQuery = `
+            INSERT INTO cart (user_id, prod_id, quantity)
+            VALUES ($1, $2, $3)
+        `;
+        await pool.query(insertQuery, [user_id, prod_id, quantity]);
+
+        res.status(201).json({ message: 'Added to Cart' });
+    } catch (err) {
+        console.log(err);
+        res.status(403).json({ error: `Something went wrong. ${err.message}` });
+    }
+});
+
+// display all cart items for particular User.
+router.post('/allcartitems', async(req, res)=>{
+    const {user_id} = req.body;
+
+    try{
+        const query = `
+            SELECT products.title, products.price, products.image_url, cart.quantity FROM products, cart
+            WHERE (user_id = $1) AND (products.prod_id = cart.prod_id)
+        `;
+        
+        const result = await pool.query(query, [user_id]);
+        res.status(201).json({
+            items: result.rows
+        })
+    } catch(err) {
+        res.status(403).json({error: err});
+    }
+})
+
+
 module.exports = router;

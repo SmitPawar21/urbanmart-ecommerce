@@ -28,10 +28,18 @@ const login = async (req, res) =>{
     const {email, password} = req.body;
     
     const doesEmailExists = await isEmailExists(email);
-    const savedPassword = await checkPassword(email, password);
+    const userId = await checkPassword(email, password);
 
-    if(doesEmailExists && savedPassword)
-        return res.status(201).json({message:'User Logged in successfully'});
+    if(doesEmailExists && userId){
+
+        res.cookie('user_id', userId,{
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000,
+            sameSite: 'strict',
+        })
+
+        return res.status(201).json({message:'User Logged in successfully', user_id: userId});
+    }
 
     return res.status(403).json({error:'Check your credentials again'});
 }

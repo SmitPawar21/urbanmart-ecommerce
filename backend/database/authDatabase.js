@@ -31,15 +31,17 @@ const isEmailExists = async (email) =>{
 
 const checkPassword = async(email, password) =>{
     const query = `
-        SELECT EXISTS (
-            SELECT 1
-            FROM users
-            WHERE email = $1 AND password = $2
-        )
+        SELECT user_id
+        FROM users
+        WHERE email = $1 AND password = $2
     `;
 
     const result = await pool.query(query, [email, password]);
-    return result.rows[0].exists;
+    if (result.rows.length > 0) {
+        console.log(result.rows[0].user_id);
+        return result.rows[0].user_id;
+    }
+    return null;
 }
 
 module.exports = {insertRowUsers, isEmailExists, checkPassword};
