@@ -138,7 +138,7 @@ export const ProductPage = ()=>{
 
                         <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw', padding:'1vh 1vw', fontSize:'1.2vw'}}>
                             <BookmarkIcon/>
-                            Save to Watchlist
+                            Reviews
                         </button>
 
                         <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw', padding:'1vh 1vw', fontSize:'1.2vw'}}

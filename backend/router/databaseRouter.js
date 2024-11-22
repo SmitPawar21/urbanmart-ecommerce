@@ -125,7 +125,7 @@ router.post('/allcartitems', async(req, res)=>{
 
     try{
         const query = `
-            SELECT products.title, products.price, products.image_url, cart.quantity FROM products, cart
+            SELECT products.title, products.price, products.image_url, cart.quantity, products.prod_id FROM products, cart
             WHERE (user_id = $1) AND (products.prod_id = cart.prod_id)
         `;
         
@@ -133,6 +133,26 @@ router.post('/allcartitems', async(req, res)=>{
         res.status(201).json({
             items: result.rows
         })
+    } catch(err) {
+        res.status(403).json({error: err});
+    }
+})
+
+// Delete item from cart
+router.post('/deleteitem', async (req, res) =>{
+    const {user_id, prod_id} = req.body;
+    console.log(user_id, prod_id);
+
+    try{
+        const query = `
+            DELETE FROM cart
+            WHERE user_id = $1 AND prod_id = $2
+        `;
+
+        const values = [user_id, prod_id];
+        await pool.query(query, values);
+
+        res.status(201).json({message: 'Successfully deleted'});
     } catch(err) {
         res.status(403).json({error: err});
     }

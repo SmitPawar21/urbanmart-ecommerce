@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 export const CheckoutPage = () => {
     const [list, setList] = useState([]);
+    const [address, setAddress] = useState({
+        street:'',
+        city:'',
+        state:''
+    });
 
     useEffect(() => {
         const cookie_se_aya_hua_userId = Cookies.get('user_id');
@@ -28,12 +32,31 @@ export const CheckoutPage = () => {
 
         fetchCart();
 
-    }, [])
+        const fetchAddress = async()=>{
+            await fetch('http://localhost:5000/useraddress',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify({user_id: cookie_se_aya_hua_userId})
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                setAddress({
+                    street: data.street,
+                    city: data.city,
+                    state: data.state
+                })
+            });
+        }
+
+        fetchAddress();
+
+    }, []);
 
     const [paymentMethod, setPaymentMethod] = useState('Credit Card');
     const [totalAmount, setTotalAmount] = useState(0);
 
-    // Calculate the total amount
     const calculateTotalAmount = () => {
         let total = 0;
         list.forEach(order => {
@@ -42,18 +65,15 @@ export const CheckoutPage = () => {
         setTotalAmount(total);
     };
 
-    // Handle payment method change
     const handlePaymentMethodChange = (event) => {
         setPaymentMethod(event.target.value);
     };
 
-    // Trigger place order action
     const handlePlaceOrder = () => {
         alert(`Order placed successfully with payment via ${paymentMethod}!`);
     };
 
-    // Recalculate total when component mounts or orders change
-    React.useEffect(() => {
+    useEffect(() => {
         calculateTotalAmount();
     }, [list]);
 
@@ -70,17 +90,19 @@ export const CheckoutPage = () => {
                             <li key={item.id} className="order-item">
                                 <span className="order-name" style={{width:'50%'}}>{item.title}</span>
                                 <span className="order-quantity">x{item.quantity}</span>
-                                <span className="order-price">${item.price * item.quantity}</span>
+                                <span className="order-price">₹{item.price * item.quantity}.00</span>
                             </li>
                         ))}
                     </ul>
 
                     <div className="total-summary">
-                        <h3>Total: ${totalAmount.toFixed(2)}</h3>
+                        <h3>Total: ₹{totalAmount}.00</h3>
                     </div>
                     <div style={{marginTop:'3vh'}}>
                         <h5>Order placing at this address:</h5>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime, voluptates</p>
+                        <p>{address.street}</p>
+                        <p>{address.city}</p>
+                        <p>{address.state}</p>
                     </div>
                 </div>
 
@@ -131,7 +153,6 @@ export const CheckoutPage = () => {
                     </button>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 };

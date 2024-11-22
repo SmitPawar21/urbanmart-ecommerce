@@ -43,6 +43,30 @@
   gap: 2vh;
 }
 
+.about-page{
+  width: 100%;
+  height: 88vh;
+  position: fixed;
+  top: 12vh;
+  background-image: url('./images/about_img.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.inside-about{
+  width: 100%;
+  height: 200vh;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  padding:'5vh 0vw' !important;
+  background-color: rgba(0, 0, 0, 0.232);
+}
+
 /* PRODUCT CARD CSS */
 
 .product-card {
@@ -184,7 +208,7 @@
   width: 100%;
   height: 50px;
   overflow: hidden;
-  background-color: yellow;
+  background-color: #FFD700;
 }
 
 .scrolling-text-wrapper {

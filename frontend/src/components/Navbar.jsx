@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Cookies from "js-cookie";
 
-const pages = ['Home', 'about', 'collection', 'watchlist', 'cart', 'subscription'];
+const pages = ['Home', 'about', 'collection', 'cart', 'subscription'];
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -157,7 +157,6 @@ export const Navbar = () => {
             ))}
           </Box>
 
-          {/* User authentication section */}
           <Box sx={{ flexGrow: 0 }}>
             {!userId ? (
               <Button
@@ -180,7 +179,7 @@ export const Navbar = () => {
             ) : (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <AccountCircleIcon sx={{ color: 'white', fontSize: '2rem' }} />
+                  <AccountCircleIcon sx={{ color: 'white', fontSize: '3vw' }} />
                 </IconButton>
                 <Menu
                   sx={{ mt: '45px' }}
