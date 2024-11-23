@@ -157,7 +157,22 @@ router.post('/deleteitem', async (req, res) =>{
     } catch(err) {
         res.status(403).json({error: err});
     }
-})
+});
 
+router.post('/reviews', async(req, res)=>{
+    const {prod_id} = req.body;
+
+    try{
+        const query = `
+            SELECT review_text, rating FROM reviews
+            WHERE prod_id = $1
+        `;
+
+        const result = await pool.query(query, [prod_id]);
+        res.status(201).json({response: result.rows});
+    } catch(err) {
+        res.status(403).json({error: 'Error in getting the review.'});
+    }
+});
 
 module.exports = router;

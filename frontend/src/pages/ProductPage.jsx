@@ -3,9 +3,7 @@ import { useAuth } from "../components/AuthProvider";
 import { useEffect, useState } from "react";
 import StarIcon from '@mui/icons-material/Star';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Footer } from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -22,6 +20,9 @@ export const ProductPage = ()=>{
         star:'',
         gender:''
     });
+
+    const [list, setList] = useState([]);
+
     const [size, setSize] = useState('S');
     const [qty, setQty] = useState(1);
 
@@ -40,7 +41,23 @@ export const ProductPage = ()=>{
             })
         };
 
+        const fetchReviews = async()=>{
+            await fetch('http://localhost:5000/reviews',{
+                method:'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ prod_id: prodId })
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data);
+                setList(data.response);
+            })
+        };
+
         fetchDetails();
+        fetchReviews();
     },[]);
 
     const handleSize = (size) =>{
@@ -91,7 +108,7 @@ export const ProductPage = ()=>{
 
             <div style={{display:'flex', width:'100%', height:'100vh', padding:'15vh 3vw', boxSizing:'border-box', justifyContent:'space-around', alignItems:'center', backgroundColor:'#dfd3c3' }}>
                 <img style={{width:'25vw', height:'60vh', border:'2px solid black'}} src={item.image_url} />
-                <div style={{padding:'2vh 5vw', boxSizing:'border-box', width:'60vw', backgroundColor:'#c7b198', boxShadow:'10px 10px 30px black'}}>
+                <div style={{padding:'2vh 5vw', boxSizing:'border-box', width:'60vw', maxHeight:'70vh', backgroundColor:'#c7b198', boxShadow:'10px 10px 30px black', overflowY:'scroll'}}>
                     <h1> {item.title} </h1>
                     <p style={{display:'flex', alignItems:'center', fontWeight:'400'}}>     
                         {(()=>{
@@ -136,17 +153,29 @@ export const ProductPage = ()=>{
                             Add to Cart
                         </button>
 
-                        <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw', padding:'1vh 1vw', fontSize:'1.2vw'}}>
-                            <BookmarkIcon/>
-                            Reviews
-                        </button>
-
                         <button class="product-card__btn" style={{marginTop:'5vh', marginRight:'2vw', padding:'1vh 1vw', fontSize:'1.2vw'}}
                         onClick={handleShop}
                         >
                             <ArrowBackIcon/>
                             Back To Shop
                         </button>
+                    </div>
+
+                    <div>
+                        <h4 style={{marginTop:'3vh', marginBottom:'3vh'}}>Customer Reviews: </h4>
+                        <ul>
+                            {
+                                list.map(item => {
+                                    return <li style={{display:'flex', width:'100%', justifyContent:'space-between', boxSizing:'border-box', padding:'2vh 1vw', border:'1px solid black', marginBottom:'2vh'}}>
+                                        <p> {item.review_text} </p>
+                                        <span style={{display:'flex', alignItems:'center'}}>
+                                            {item.rating}
+                                            <StarIcon sx={{color:'orange', width:'20px'}}/>
+                                        </span>
+                                    </li>
+                                })
+                            }
+                        </ul>
                     </div>
 
                 </div>
