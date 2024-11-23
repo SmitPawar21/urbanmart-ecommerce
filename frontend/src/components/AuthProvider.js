@@ -28,9 +28,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [category, setCategory] = useState([]);
   
   return (
-    <AuthContext.Provider value={{ prodId, newProdId, addToCart, cart, searchTerm, setSearchTerm, userId, login}}>
+    <AuthContext.Provider value={{ prodId, newProdId, addToCart, cart, searchTerm, setSearchTerm, userId, login, category, setCategory}}>
       {children}
     </AuthContext.Provider>
   );
