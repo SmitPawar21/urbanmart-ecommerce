@@ -66,7 +66,6 @@ The application uses **PostgreSQL** as the database with the following tables:
 
 ### **Frontend**
 - **React.js**: Build the user interface with interactive and dynamic components.
-- **Responsive Design**: Ensures compatibility across devices.
 
 #### Pages:
 1. **Home Page**: Displays the latest products with a quick add-to-cart feature.
