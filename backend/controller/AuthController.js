@@ -1,4 +1,4 @@
-const {insertRowUsers , isEmailExists, checkPassword, getAddress} = require("../database/authDatabase");
+const {insertRowUsers , isEmailExists, checkPassword, getAddress, getUsername} = require("../database/authDatabase");
 const bcrypt = require("bcrypt");
 
 const signup = async (req, res) =>{
@@ -56,4 +56,16 @@ const userAddress = async (req, res)=>{
     }
 }
 
-module.exports = {signup, login, userAddress};
+const username = async(req, res)=>{
+    const {user_id} = req.body;
+
+    try{
+        const result = await getUsername(user_id);
+        console.log(result);
+        res.status(201).json({name: result.name, email: result.email});
+    } catch(err) {
+        res.status(403).json({error: err});
+    }
+}
+
+module.exports = {signup, login, userAddress, username};

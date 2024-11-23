@@ -13,8 +13,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Cookies from "js-cookie";
+import { ProfilePage } from '../pages/ProfilePage';
 
-const pages = ['Home', 'about', 'collection', 'cart', 'subscription'];
+const pages = ['Home', 'about', 'collection', 'cart'];
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -197,8 +198,8 @@ export const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem onClick={handleProfile}>
-                    <Typography textAlign="center">Profile</Typography>
+                  <MenuItem>
+                    <ProfilePage />
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <Typography textAlign="center">Logout</Typography>

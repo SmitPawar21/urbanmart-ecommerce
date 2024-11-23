@@ -9,6 +9,7 @@ import { OrdersPage } from './pages/OrdersPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { AuthProvider } from './components/AuthProvider';
 import { AboutPage } from './pages/AboutPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/orders' element={<OrdersPage />} />
             <Route path='/about' element={<AboutPage />} />
+            <Route path='/subscription' element={<ProfilePage />} />
 
           </Routes>
         </Router>

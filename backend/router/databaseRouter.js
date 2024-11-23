@@ -15,6 +15,7 @@ cloudinary.config({
 // Add a product - only use in backend
 router.post('/add-product', async (req, res) => {
     const { title, description, price, gender, size, star, release_date, image_url } = req.body;
+    console.log(req.body);
 
     try {
         // Upload image to Cloudinary

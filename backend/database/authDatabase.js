@@ -58,4 +58,18 @@ const getAddress = async(user_id) => {
     }
 }
 
-module.exports = {insertRowUsers, isEmailExists, checkPassword, getAddress};
+const getUsername = async(user_id) => {
+    const query = `
+        SELECT name, email FROM users
+        WHERE user_id = $1
+    `;
+
+    try{
+        const result = await pool.query(query, [user_id]);
+        return result.rows[0];
+    } catch (err){
+        return null;
+    }
+}
+
+module.exports = {insertRowUsers, isEmailExists, checkPassword, getAddress, getUsername};
