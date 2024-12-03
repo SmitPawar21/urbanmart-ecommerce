@@ -20,7 +20,7 @@ export const Sidebar = () => {
 
   const handleSearch = (e)=>{
     setSearchTerm(e.target.value);
-  }
+  };
 
   const handleCategoryChange = (event) => {
     const { value, checked } = event.target;
