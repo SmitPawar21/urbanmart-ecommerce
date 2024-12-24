@@ -13,7 +13,8 @@ const PORT_p = process.env.PORT;
 
 app.use(cors({
     origin: 'https://urbanmart-ecommerce.vercel.app',
-    credentials: true 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
 }));
 
 app.use('/', databaseRouter);
