@@ -26,6 +26,7 @@ export const LatestProds = () => {
 
     return (
         <div className="products-section">
+            <h1>card card card</h1>
             <div className="card-area">
                 {
                     products.map(product =>{
