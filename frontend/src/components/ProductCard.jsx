@@ -22,7 +22,7 @@ export const ProductCard = (props) => {
             return;
         }
 
-        await fetch('http://localhost:5000/addtocart',{
+        await fetch(`${backendurl}/addtocart`,{
             method:'POST',
             headers:{
                 'content-type': 'application/json'

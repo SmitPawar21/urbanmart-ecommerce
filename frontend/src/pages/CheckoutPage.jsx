@@ -11,12 +11,14 @@ export const CheckoutPage = () => {
         state:''
     });
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     useEffect(() => {
         const cookie_se_aya_hua_userId = Cookies.get('user_id');
         console.log("cookie_se_aya_hua_userId: ",cookie_se_aya_hua_userId);
         
         const fetchCart = async()=>{
-            await fetch('http://localhost:5000/allcartitems',{
+            await fetch(`${backendurl}/allcartitems`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -33,7 +35,7 @@ export const CheckoutPage = () => {
         fetchCart();
 
         const fetchAddress = async()=>{
-            await fetch('http://localhost:5000/useraddress',{
+            await fetch(`${backendurl}/useraddress`,{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'

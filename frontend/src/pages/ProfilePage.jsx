@@ -10,8 +10,10 @@ export const ProfilePage = ()=>{
 
         const userId =  Cookies.get('user_id');
 
+        const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
         const fetchUserDetails = async ()=>{
-            await fetch('http://localhost:5000/username',{
+            await fetch(`${backendurl}/username`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'

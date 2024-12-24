@@ -6,10 +6,12 @@ export const Products = () => {
     const [products, setProducts] = useState([]);
     const { searchTerm, category } = useAuth();
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:5000/products');
+                const response = await fetch(`${backendurl}/products`);
                 const data = await response.json();
                 console.log('Fetched products:', data); // Debug log
                 setProducts(data);

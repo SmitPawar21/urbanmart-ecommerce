@@ -6,11 +6,13 @@ export const LatestProds = () => {
 
     const[products, setProducts] = useState([]);
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
 
     useEffect(()=>{
 
         const fetchProducts = async()=>{
-            await fetch('http://localhost:5000/latestproducts')
+            await fetch(`${backendurl}/latestproducts`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

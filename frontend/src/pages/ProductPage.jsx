@@ -21,6 +21,8 @@ export const ProductPage = ()=>{
         gender:''
     });
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     const [list, setList] = useState([]);
 
     const [size, setSize] = useState('S');
@@ -28,7 +30,7 @@ export const ProductPage = ()=>{
 
     useEffect(()=>{
         const fetchDetails = async()=>{
-            await fetch('http://localhost:5000/oneproduct',{
+            await fetch(`${backendurl}/oneproduct`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -42,7 +44,7 @@ export const ProductPage = ()=>{
         };
 
         const fetchReviews = async()=>{
-            await fetch('http://localhost:5000/reviews',{
+            await fetch(`${backendurl}/reviews`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -77,7 +79,7 @@ export const ProductPage = ()=>{
             return;
         }
 
-        await fetch('http://localhost:5000/addtocart',{
+        await fetch(`${backendurl}/addtocart`,{
             method:'POST',
             headers:{
                 'content-type': 'application/json'

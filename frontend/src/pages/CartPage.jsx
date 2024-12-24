@@ -11,11 +11,13 @@ export const CartPage = () => {
 
     const [list, setList] = useState([]);
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     const cookie_se_aya_hua_userId = Cookies.get('user_id');
     console.log("cookie_se_aya_hua_userId: ", cookie_se_aya_hua_userId);
 
     const fetchCart = async () => {
-        await fetch('http://localhost:5000/allcartitems', {
+        await fetch(`${backendurl}/allcartitems`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -43,7 +45,7 @@ export const CartPage = () => {
     }
     const handleDelete = async (prodId) => {
         const userId = Cookies.get('user_id');
-        await fetch('http://localhost:5000/deleteitem',{
+        await fetch(`${backendurl}/deleteitem`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'

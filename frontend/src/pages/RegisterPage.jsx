@@ -10,6 +10,8 @@ export const RegisterPage = () => {
 
     const [isFlip, setIsFlip] = useState(false);
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     const handleFlip = () => {
         setIsFlip((isFlip === true) ? false : true);
     }
@@ -61,7 +63,7 @@ export const RegisterPage = () => {
 
         console.log(signupData);
 
-        await fetch('http://localhost:5000/signup',{
+        await fetch(`${backendurl}/signup`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -88,7 +90,7 @@ export const RegisterPage = () => {
       };
 
       const performLogin = async ()=>{
-        await fetch('http://localhost:5000/login',{
+        await fetch(`${backendurl}/login`,{
             method: 'POST',
             credentials: 'include',
             headers:{
