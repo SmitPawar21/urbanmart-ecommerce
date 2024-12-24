@@ -17,4 +17,6 @@ app.use(cors({
 app.use('/', databaseRouter);
 app.use('/', AuthRouter)
 
-
+app.listen(PORT =>{
+    console.log(PORT);
+})
