@@ -13,6 +13,14 @@ export const CheckoutPage = () => {
 
     const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
 
+    const calculateTotalAmount = () => {
+        let total = 0;
+        list.forEach(order => {
+            total += order.price * order.quantity;
+        });
+        setTotalAmount(total);
+    };
+
     useEffect(() => {
         const cookie_se_aya_hua_userId = Cookies.get('user_id');
         console.log("cookie_se_aya_hua_userId: ",cookie_se_aya_hua_userId);
@@ -54,18 +62,10 @@ export const CheckoutPage = () => {
 
         fetchAddress();
 
-    }, []);
+    }, [calculateTotalAmount]);
 
     const [paymentMethod, setPaymentMethod] = useState('Credit Card');
     const [totalAmount, setTotalAmount] = useState(0);
-
-    const calculateTotalAmount = () => {
-        let total = 0;
-        list.forEach(order => {
-            total += order.price * order.quantity;
-        });
-        setTotalAmount(total);
-    };
 
     const handlePaymentMethodChange = (event) => {
         setPaymentMethod(event.target.value);

@@ -60,7 +60,7 @@ export const ProductPage = ()=>{
 
         fetchDetails();
         fetchReviews();
-    },[]);
+    },[prodId]);
 
     const handleSize = (size) =>{
         setSize(size);
@@ -109,7 +109,7 @@ export const ProductPage = ()=>{
             <Navbar/>
 
             <div style={{display:'flex', width:'100%', height:'100vh', padding:'15vh 3vw', boxSizing:'border-box', justifyContent:'space-around', alignItems:'center', backgroundColor:'#dfd3c3' }}>
-                <img style={{width:'25vw', height:'60vh', border:'2px solid black'}} src={item.image_url} />
+                <img style={{width:'25vw', height:'60vh', border:'2px solid black'}} src={item.image_url} alt="tasveer" />
                 <div style={{padding:'2vh 5vw', boxSizing:'border-box', width:'60vw', maxHeight:'70vh', backgroundColor:'#c7b198', boxShadow:'10px 10px 30px black', overflowY:'scroll'}}>
                     <h1> {item.title} </h1>
                     <p style={{display:'flex', alignItems:'center', fontWeight:'400'}}>     

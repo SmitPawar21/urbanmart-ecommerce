@@ -129,7 +129,7 @@ export const RegisterPage = () => {
 
                         <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', height: '100%' }}>
 
-                            <img src={signup_img} style={{ width: '45%', height: '100%', position: 'relative' }} />
+                            <img src={signup_img} style={{ width: '45%', height: '100%', position: 'relative' }} alt="tasveer" />
 
                             <div style={{ width: '50%', display:'flex', justifyContent:'center', alignItems:'start', flexDirection:'column' }}>
                                 <h2 style={{ color: "white", marginTop: '1vh' }}> Login </h2>
@@ -187,7 +187,7 @@ export const RegisterPage = () => {
                                     <p style={{ color: 'yellow', cursor: 'pointer' }} onClick={handleFlip}> Login </p>
                                 </p>
                             </div>
-                            <img src={signup_img} style={{ width: '45%', height: '100%', position: 'relative' }} />
+                            <img src={signup_img} style={{ width: '45%', height: '100%', position: 'relative' }} alt="tasveer" />
                         </div>
                     </div>
                 </div>

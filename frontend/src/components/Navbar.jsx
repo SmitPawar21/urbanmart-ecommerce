@@ -50,12 +50,6 @@ export const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  // User menu options
-  const handleProfile = () => {
-    navigate('/profile');
-    handleCloseUserMenu();
-  };
-
   const handleLogout = () => {
     Cookies.remove('user_id');
     navigate('/');

@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect } from "react";
@@ -16,7 +16,7 @@ export const CartPage = () => {
     const cookie_se_aya_hua_userId = Cookies.get('user_id');
     console.log("cookie_se_aya_hua_userId: ", cookie_se_aya_hua_userId);
 
-    const fetchCart = async () => {
+    const fetchCart = useCallback(async () => {
         await fetch(`${backendurl}/allcartitems`, {
             method: 'POST',
             headers: {
@@ -29,13 +29,13 @@ export const CartPage = () => {
                 console.log(data);
                 setList(data.items);
             })
-    };
+    });
 
     useEffect(() => {
 
         fetchCart();
 
-    }, [])
+    }, [fetchCart])
 
     const handleCheckout = () => {
         navigate('/checkout');
@@ -97,8 +97,8 @@ export const CartPage = () => {
                             list.map((item, index) => { 
 
                                 return (
-                                    <li key={index} style={{ width: '100%', height: '15vh', padding: '', boxSizing: 'border-box', backgroundColor: '#dfd3c3', display: 'flex', alignItems: 'center', marginBottom: '3vh', padding: '0vh 2vw' }}>
-                                        <img style={{ width: '10%', height: '90%', marginRight: '4vw' }} src={item.image_url} />
+                                    <li key={index} style={{ width: '100%', height: '15vh', boxSizing: 'border-box', backgroundColor: '#dfd3c3', display: 'flex', alignItems: 'center', marginBottom: '3vh', padding: '0vh 2vw' }}>
+                                        <img style={{ width: '10%', height: '90%', marginRight: '4vw' }} src={item.image_url} alt="tasveer" />
 
                                         <h3 style={{ width: '40%', marginRight: '4vw' }}> {item.title} </h3>
 
