@@ -16,6 +16,23 @@ app.use(cors({
     credentials: true
 }));
 
+// In index.js
+// Add this before your routes
+app.use(async (req, res, next) => {
+    try {
+        const client = await pool.connect();
+        await client.query('SELECT 1');
+        client.release();
+        next();
+    } catch (err) {
+        console.error('Database connection error:', err);
+        return res.status(500).json({ 
+            message: 'Database connection error',
+            error: err.message 
+        });
+    }
+});
+
 app.use('/', databaseRouter);
 app.use('/', AuthRouter);
 
