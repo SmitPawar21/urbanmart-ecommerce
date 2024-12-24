@@ -29,8 +29,4 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
-app.listen(PORT_p, () =>{
-    console.log(PORT_p);
-}).on('error', (err) => {
-    console.error('Server failed to start:', err);
-});
+module.exports = app;
