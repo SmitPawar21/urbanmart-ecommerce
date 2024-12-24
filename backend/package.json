@@ -1,4 +1,7 @@
 {
+  "name": "your-backend",
+  "version": "1.0.0",
+  "main": "api/index.js",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.1",
