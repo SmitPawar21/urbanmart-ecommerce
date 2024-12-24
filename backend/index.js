@@ -9,6 +9,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+const PORT_p = process.env.PORT;
+
 app.use(cors({
     origin: 'https://urbanmart-ecommerce.vercel.app',
     credentials: true 
@@ -17,6 +19,6 @@ app.use(cors({
 app.use('/', databaseRouter);
 app.use('/', AuthRouter)
 
-app.listen(PORT =>{
-    console.log(PORT);
+app.listen(PORT_p =>{
+    console.log(PORT_p);
 })
