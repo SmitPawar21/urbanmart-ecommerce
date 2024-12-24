@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ['https://urbanmart-ecommerce.vercel.app', 'https://urbanmart-ecommerce-zwgk.vercel.app'],
+    origin: ['https://urbanmart-ecommerce.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
