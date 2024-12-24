@@ -16,6 +16,8 @@ export const ProductCard = (props) => {
         navigate('/product');
     }
 
+    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
+
     const handleCart = async (prod_id, qty) =>{
         if(!(Cookies.get('user_id'))){
             alert('You have to Register First');
