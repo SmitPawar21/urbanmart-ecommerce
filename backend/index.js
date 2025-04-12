@@ -1,10 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
+dotenv.config();
 const databaseRouter = require("./router/databaseRouter");
 const AuthRouter = require("./router/AuthRouter")
 const cors = require("cors");
 
-dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -32,5 +32,7 @@ app.use(async (req, res, next) => {
 
 app.use('/', databaseRouter);
 app.use('/', AuthRouter);
+
+
 
 module.exports = app;
