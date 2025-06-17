@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import backend_url from "../urls/url";
 
 export const ProfilePage = ()=>{
 
@@ -10,10 +11,8 @@ export const ProfilePage = ()=>{
 
         const userId =  Cookies.get('user_id');
 
-        const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
-
         const fetchUserDetails = async ()=>{
-            await fetch(`${backendurl}/username`,{
+            await fetch(`${backend_url}/username`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'

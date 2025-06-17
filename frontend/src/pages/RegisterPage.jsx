@@ -3,14 +3,13 @@ import { useState } from "react";
 import signup_img from "../images/signup_img.avif";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthProvider";
+import backend_url from "../urls/url";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
     const {login} = useAuth();
 
     const [isFlip, setIsFlip] = useState(false);
-
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
 
     const handleFlip = () => {
         setIsFlip((isFlip === true) ? false : true);
@@ -63,7 +62,7 @@ export const RegisterPage = () => {
 
         console.log(signupData);
 
-        await fetch(`${backendurl}/signup`,{
+        await fetch(`${backend_url}/signup`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -90,7 +89,7 @@ export const RegisterPage = () => {
       };
 
       const performLogin = async ()=>{
-        await fetch(`${backendurl}/login`,{
+        await fetch(`${backend_url}/login`,{
             method: 'POST',
             credentials: 'include',
             headers:{

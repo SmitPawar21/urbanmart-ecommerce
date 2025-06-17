@@ -1,28 +1,13 @@
-// In postgresql.js
+// db.js
 const { Pool } = require('pg');
-
-const isProduction = process.env.NODE_ENV === 'production';
+require('dotenv').config();
 
 const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
-  ssl: isProduction ? { rejectUnauthorized: false } : false, // 🔁 SSL only in production
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
-
-// Optional: Test connection
-const testConnection = async () => {
-  try {
-    const client = await pool.connect();
-    console.log('✅ Database connection successful');
-    client.release();
-  } catch (err) {
-    console.error('❌ Database connection error:', err);
-  }
-};
-
-testConnection();
 
 module.exports = pool;

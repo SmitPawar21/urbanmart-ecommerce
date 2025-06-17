@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import Cookies from "js-cookie";
+import backend_url from '../urls/url';
 
 export const CheckoutPage = () => {
     const [list, setList] = useState([]);
@@ -11,8 +12,6 @@ export const CheckoutPage = () => {
     });
     const [totalAmount, setTotalAmount] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState('Credit Card');
-
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
 
     // Memoize the calculateTotalAmount function using useCallback
     const calculateTotalAmount = useCallback(() => {
@@ -28,7 +27,7 @@ export const CheckoutPage = () => {
         console.log("cookie_se_aya_hua_userId: ", cookie_se_aya_hua_userId);
 
         const fetchCart = async () => {
-            await fetch(`${backendurl}/allcartitems`, {
+            await fetch(`${backend_url}/allcartitems`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -45,7 +44,7 @@ export const CheckoutPage = () => {
         fetchCart();
 
         const fetchAddress = async () => {
-            await fetch(`${backendurl}/useraddress`, {
+            await fetch(`${backend_url}/useraddress`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -64,7 +63,7 @@ export const CheckoutPage = () => {
 
         fetchAddress();
 
-    }, [backendurl]); // Only run once on mount or when `backendurl` changes
+    }, [backend_url]); // Only run once on mount or when `backendurl` changes
 
     useEffect(() => {
         calculateTotalAmount(); // Call the memoized function when `list` changes

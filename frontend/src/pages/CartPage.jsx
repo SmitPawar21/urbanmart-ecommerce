@@ -5,18 +5,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import backend_url from "../urls/url";
 
 export const CartPage = () => {
     const navigate = useNavigate();
 
     const [list, setList] = useState([]);
 
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
-
     const fetchCart = useCallback(async () => {
         const cookie_se_aya_hua_userId = Cookies.get('user_id');
         console.log("cookie_se_aya_hua_userId: ", cookie_se_aya_hua_userId);
-        await fetch(`${backendurl}/allcartitems`, {
+        await fetch(`${backend_url}/allcartitems`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -28,7 +27,7 @@ export const CartPage = () => {
                 console.log(data);
                 setList(data.items);
             })
-    }, [backendurl]);
+    }, [backend_url]);
 
     useEffect(() => {
 
@@ -44,7 +43,7 @@ export const CartPage = () => {
     }
     const handleDelete = async (prodId) => {
         const userId = Cookies.get('user_id');
-        await fetch(`${backendurl}/deleteitem`,{
+        await fetch(`${backend_url}/deleteitem`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'

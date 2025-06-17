@@ -1,18 +1,16 @@
 import { ProductCard } from "./ProductCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import backend_url from "../urls/url.js";
 
 export const LatestProds = () => {
 
     const[products, setProducts] = useState([]);
 
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
-
-
     useEffect(()=>{
 
         const fetchProducts = async()=>{
-            await fetch(`${backendurl}/latestproducts`)
+            await fetch(`${backend_url}/latestproducts`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

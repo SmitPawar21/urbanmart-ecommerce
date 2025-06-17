@@ -6,6 +6,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import backend_url from "../urls/url";
 
 export const ProductPage = ()=>{
     const navigate = useNavigate();
@@ -21,8 +22,6 @@ export const ProductPage = ()=>{
         gender:''
     });
 
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
-
     const [list, setList] = useState([]);
 
     const [size, setSize] = useState('S');
@@ -30,7 +29,7 @@ export const ProductPage = ()=>{
 
     useEffect(()=>{
         const fetchDetails = async()=>{
-            await fetch(`${backendurl}/oneproduct`,{
+            await fetch(`${backend_url}/oneproduct`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -44,7 +43,7 @@ export const ProductPage = ()=>{
         };
 
         const fetchReviews = async()=>{
-            await fetch(`${backendurl}/reviews`,{
+            await fetch(`${backend_url}/reviews`,{
                 method:'POST',
                 headers:{
                     'content-type': 'application/json'
@@ -79,7 +78,7 @@ export const ProductPage = ()=>{
             return;
         }
 
-        await fetch(`${backendurl}/addtocart`,{
+        await fetch(`${backend_url}/addtocart`,{
             method:'POST',
             headers:{
                 'content-type': 'application/json'

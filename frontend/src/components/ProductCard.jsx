@@ -3,6 +3,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
 import Cookies from "js-cookie"
+import backend_url from '../urls/url';
 
 export const ProductCard = (props) => {
 
@@ -16,15 +17,13 @@ export const ProductCard = (props) => {
         navigate('/product');
     }
 
-    const backendurl = "https://urbanmart-ecommerce-zwgk.vercel.app";
-
     const handleCart = async (prod_id, qty) =>{
         if(!(Cookies.get('user_id'))){
             alert('You have to Register First');
             return;
         }
 
-        await fetch(`${backendurl}/addtocart`,{
+        await fetch(`${backend_url}/addtocart`,{
             method:'POST',
             headers:{
                 'content-type': 'application/json'

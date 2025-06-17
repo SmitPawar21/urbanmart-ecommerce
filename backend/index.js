@@ -4,13 +4,14 @@ dotenv.config();
 const databaseRouter = require("./router/databaseRouter");
 const AuthRouter = require("./router/AuthRouter")
 const cors = require("cors");
+const pool = require('./database/postgresql');
 
 
 const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ['https://urbanmart-ecommerce.vercel.app'],
+    origin: ['http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
@@ -33,6 +34,8 @@ app.use(async (req, res, next) => {
 app.use('/', databaseRouter);
 app.use('/', AuthRouter);
 
-
+app.listen(5000, () => {
+    console.log("backend server listening on port: 5000");
+})
 
 module.exports = app;
