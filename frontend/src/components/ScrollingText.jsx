@@ -3,7 +3,7 @@ import React from 'react';
 export const ScrollingText = () => {
 
     const text1 = "20% Discount on each product";
-    const text2 = "Offer only till 30th November 2024";
+    const text2 = "Offer only till 3 June 2025";
     const text3 = "Hurry Up Now!"
 
   return (
